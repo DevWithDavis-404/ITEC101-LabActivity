@@ -1,6 +1,6 @@
 <div class="container">
-    <?php include 'hero.php'; ?>
-    <!-- <?php include 'carousel.php'; ?> -->
+    <?php include 'components/hero.php';?>
+    <!-- <?php include '../components/carousel.php'; ?> -->
     <div class="content mt-4">
         <div class="row mb-2">
             <div class="col-md-6">
