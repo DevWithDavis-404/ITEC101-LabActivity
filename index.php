@@ -1,3 +1,14 @@
+<?php
+
+session_start();
+
+if(!isset($_SESSION['email'])) {
+
+    header('Location: pages/login.php');
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
