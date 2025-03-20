@@ -22,8 +22,12 @@ if (isset($_POST["register"])) {
         // Hash the password with bcrypt algorithm
         $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-        // Concatinate the name
-        $name = $first_name . ' ' . $middle_name . ' ' . $last_name;
+        // Concatenate the name
+        if (!$middle_name) {
+            $name = $first_name . ' ' . $last_name;
+        } else {
+            $name = $first_name . ' ' . $middle_name . ' ' . $last_name;
+        }
 
         // Insert the user in the database
         $query = "INSERT INTO users (name, gender, date_of_birth, phone_number, user_name, email_address, password) 
@@ -73,15 +77,14 @@ if (isset($_POST["login"])) {
 
         // Verify the hashed password
         if (password_verify($password, $db_password)) {
-
-            session_start();
+            // Store email in the session
+            $_SESSION["email"] = $db_email;
 
             // Show success message then redirect to home page
-            echo "<script>alert('Logged in successfully!');</script>";
-
-            $_SESSION["email"] = $db_email; // Store session data
-
-            header("Location: ../index.php?home");
+            echo "<script>
+                alert('Logged in successfully!');
+                window.location.href='../index.php?home';
+            </script>";
 
             exit();
         } else {
